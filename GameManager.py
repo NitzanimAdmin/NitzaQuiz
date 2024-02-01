@@ -17,7 +17,6 @@ class GameManager(object):
             self.questions = self.load_questions()
         self.current_question = 0
         self.score = 0
-        self.max_score = sum([que.score for que in self.questions])
 
     def load_questions(self):
         return [
@@ -54,7 +53,7 @@ class GameManager(object):
         time.sleep(1)
         while run:
             if self.current_question >= len(self.questions):
-                cprint(f"THE END! your score is {self.score} out of {self.max_score}", Fore.BLACK, Back.YELLOW)
+                cprint(f"THE END! your score is {self.score} out of {len(self.questions)}", Fore.BLACK, Back.YELLOW)
                 break
 
             question = self.questions[self.current_question]
@@ -66,13 +65,12 @@ class GameManager(object):
                 break
 
             result = question.check(answer)
-            if result == question.score:
+            if result:
                 cprint("well done! moving on...", Fore.GREEN)
-            elif 0 < result < question.score:
-                cprint("nice try, but this is partially correct", Fore.YELLOW)
+                self.score += 1
             else:
                 cprint("wrong answer! moving on...", Fore.RED)
-            self.score += result
+
             self.current_question += 1
             time.sleep(1)
             

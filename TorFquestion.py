@@ -13,4 +13,4 @@ class TorFquestion(Question):
         super().show()
 
     def check(self, answer):
-        return self.score if answer.lower() == str(self.correct_answer).lower() else 0
+        return answer.lower() == str(self.correct_answer).lower()

@@ -8,7 +8,6 @@ class MultiChoice(Question):
     def __init__(self, question, answers, correct_list):
         super().__init__(question, answers, correct_list[0])
         self.correct_answers = correct_list
-        self.score = len(self.correct_answers)
 
     def show(self):
         cprint("Multiple choice:", Fore.BLACK, Back.YELLOW)
@@ -20,4 +19,4 @@ class MultiChoice(Question):
         for n in nums:
             if n in self.correct_answers:
                 score += 1
-        return score
+        return score == len(self.correct_answers)

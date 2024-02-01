@@ -8,7 +8,6 @@ class Question(object):
         self.question = question
         self.answers = answers
         self.correct_answer = correct_index
-        self.score = 1
 
     def show(self):
         cprint(self.question, Fore.BLUE)
@@ -16,4 +15,4 @@ class Question(object):
             cprint(f'{index + 1} - {answer}', Fore.BLUE)
 
     def check(self, answer):
-        return self.score if int(answer) == self.correct_answer else 0
+        return int(answer) == self.correct_answer
